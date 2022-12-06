@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace ConsoleApp1
@@ -33,41 +34,52 @@ namespace ConsoleApp1
             //Console.WriteLine(i);
 
             // Part 2
-            int[] freqChar = new int[26];
-            Reset(freqChar);
+            //int[] frequencyChar = new int[26];
+            //Reset(frequencyChar);
 
+            //for (int i = 0; i < input.Length; i++)
+            //{
+            //    for (int j = i; j < i + 14; j++)
+            //    {
+            //        frequencyChar[(int)input[j]-97] += 1;
+            //    }
+            //    // are they different?
+            //    bool different = true;
+            //    for (int k = 0; k < frequencyChar.Length; k++)
+            //    {
+            //        if (frequencyChar[k]>1)
+            //        {
+            //            different = false;
+            //        }
+            //    }
+            //    if (different)
+            //    {
+            //        Console.WriteLine(i+14);
+            //        break;          
+            //    }
+            //    else
+            //    {
+            //        Reset(frequencyChar);
+            //    }
+
+            // Part 2 with set
+            HashSet<char> set = new HashSet<char>();
             for (int i = 0; i < input.Length; i++)
             {
-                for (int j = i; j < i + 14; j++)
+                for (int j = i; j < i+14; j++)
                 {
-                    freqChar[(int)input[j]-97] += 1;
-                }
-                // are they different?
-                bool different = true;
-                for (int k = 0; k < freqChar.Length; k++)
-                {
-                    if (freqChar[k]>1)
+                    if (!set.Add(input[j]))
                     {
-                        different = false;
+                        set.Clear();
+                        break;
                     }
+                    if (set.Count==14)
+                    {
+                        Console.WriteLine($"found at: {i}");
+                    }
+                    break;
                 }
-                if (different)
-                {
-                    Console.WriteLine(i+14);
-                    break;          
-                }
-                else
-                {
-                    Reset(freqChar);
-                }
-            }
-        }
-
-        private static void Reset(int[] freqChar)
-        {
-            for (int i = 0; i < freqChar.Length; i++)
-            {
-                freqChar[i] = 0;
+                
             }
         }
     }
